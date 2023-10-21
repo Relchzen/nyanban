@@ -6,7 +6,20 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        teal: '#186F65',
+        jade: '#B5CB99',
+        cream: '#FCE09B',
+        maroon: '#B2533E',
+        darkcream: '#E1AA74',
+        dark: '#473C33',
+        light: '#FFF9C9'
+      },
+      fontFamily: {
+        comfortaa: 'Comfortaa'
+      }
+    },
   },
   plugins: [],
 }
