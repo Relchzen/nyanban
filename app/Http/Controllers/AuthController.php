@@ -22,7 +22,7 @@ class AuthController extends Controller
             return redirect('/');
         }
 
-        return back();
+        return redirect('/login');
     }
 
     public function logout(Request $request)
