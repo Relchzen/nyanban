@@ -24,16 +24,17 @@
                 <br><br>
                 <div class="md:mb-48 bg-jade p-4 rounded-sm">
                     <p class="text-dark text-xl mb-2">Login</p>
-                    <form action="" method="POST">
-                        <input type="text" name="email" id="email" class="mb-2 p-2 w-72 rounded-md" placeholder="Email address" />
+                    <form action="/auth/login" method="POST">
+                        @csrf
+                        <input type="text" name="email" id="email" class="mb-2 p-2 w-72 rounded-md" placeholder="Email address" autocomplete="off" />
                         <br />
-                        <input type="password" name="password" id="password" class="mb-2 p-2 w-64 rounded-md" placeholder="Password" />
+                        <input type="password" name="password" id="password" class="mb-2 p-2 w-64 rounded-md" placeholder="Password" autocomplete="off" />
                         <br />
                         <button type="submit" class="text-center p-1 hover:text-light w-full bg-teal rounded-md my-2 scale-95 hover:scale-100 transition ease-in-out duration-100">Login</button>
                     </form>
                     <div class="flex mb-2">
                         <p class="text-dark text-sm mr-2">Don't have an account?</p>
-                        <a class="text-sm text-maroon" href="/register">Register</a>
+                        <a class="text-sm text-maroon" href="/signup">Sign Up</a>
                     </div>
                 </div>
             </div>            

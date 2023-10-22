@@ -2,7 +2,14 @@
     <div class="container">
         <div class="flex justify-between">
             <x-logo />
-            <x-login />
+            @auth()
+            <div class="flex">
+                <x-profile-button />
+                <x-logout />
+            </div>
+            @else
+                <x-login />
+            @endauth
         </div>
     </div>
 </nav>
