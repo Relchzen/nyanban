@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,5 @@ Route::get('/signup', function () {
 Route::post('/signup', [AuthController::class, 'signup']);
 
 Route::get('/profile', [UserController::class, 'profile']);
+
+Route::get('/admin', [AdminController::class, 'index'])->middleware(['auth', 'admin']);
