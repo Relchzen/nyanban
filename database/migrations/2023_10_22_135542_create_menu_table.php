@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('price');
             $table->string('category');
             $table->string('picture')->default(null);
-            // $table->foreign('category')->references('category')->on('category');
             $table->timestamps();
         });
     }

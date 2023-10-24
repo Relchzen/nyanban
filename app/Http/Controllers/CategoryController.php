@@ -23,4 +23,17 @@ class CategoryController extends Controller
 
         return redirect('/admin/category');
     }
+
+    public function update()
+    {
+
+        return redirect('/admin/category');
+    }
+
+    public function destroy($id)
+    {
+        Category::where('id', $id)->firstOrFail()->delete();
+
+        return redirect('/admin/category');
+    }
 }

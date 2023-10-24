@@ -28,15 +28,39 @@
                             {{ $ctgr->category }}
                         </td>
                         <td class="border border-2 p-2 border-dark text-center">
-                            <button class="hover:cursor-pointer rounded-md py-1 px-2 mx-2 bg-jade text-teal hover:text-light">Edit</button>
-                            <button class="hover:cursor-pointer rounded-md p-1 mx-2 bg-lightmaroon text-dark hover:text-light" data-modal-target="deleteModal" data-modal-toggle="deleteModal">Delete</button>
-                        </td>
+                            <div class="flex">
+                                <button onclick="toggleSlideOver()" class="hover:cursor-pointer rounded-md py-1 px-2 ml-2 bg-jade text-teal hover:text-light">Edit</button>
+                                <form action="{{route("category.destroy", $ctgr->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="hover:cursor-pointer rounded-md p-1 mx-2 bg-lightmaroon text-dark hover:text-light">Delete</button>
+                                </form>
+                            </div>
+                            </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-        <x-delete-modal />
-    
+        
+        <div id="slideover-container" class="fixed inset-0 w-full h-full invisible">
+            <div id="slideover-bg" onclick="toggleSlideOver()" class="absolute duration-200 ease-out transition-all inset-0 w-full h-full bg-gray-900 opacity-0"></div>
+            <div id="slideover" class="absolute duration-200 ease-out transition-all bg-light bottom-0 h-3/5 lg:h-2/5 w-full translate-y-full">
+                <div onclick="toggleSlideOver()" class="w-8 h-8 flex items-center justify-center absolute top-0 right-0 mt-5 mr-5">
+                    <x-lucide-x class="text-dark" />
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function toggleSlideOver() {
+                
+
+                document.getElementById("slideover-container").classList.toggle("invisible");
+                document.getElementById("slideover-bg").classList.toggle("opacity-0");
+                document.getElementById("slideover-bg").classList.toggle("opacity-50");
+                document.getElementById("slideover").classList.toggle("translate-y-full");
+            }
+        </script>
 </div>
 @endsection
