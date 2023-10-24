@@ -34,16 +34,36 @@
                     <div class="form-group mt-4 mb-4">
                         <div class="captcha">
                             <span>{!! captcha_img() !!}</span>
-                            <button type="button" class="btn btn-danger" class="reload" id="reload">
-                                &#x21bb;
+                            <button type="button" class="btn btn-danger reload" id="reload" style="background-color: teal; color: white; padding: 8px 16px; border: none; border-radius: 5px;" onclick="location.reload();">
+                                    &#x21bb; Reload
                             </button>
                         </div>
                     </div>
                     <div class="form-group mb-4">
-                        <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+                        <input id="captcha" type="text" class="form-control" placeholder="Enter The Code" name="captcha">
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    <div class ="form-group">
+                        <?php
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                            // Mengambil nilai yang dikirimkan oleh pengguna
+                            $userEnteredCaptcha = $_POST['captcha'];
+
+                            // Mengambil nilai captcha yang benar
+                            $correctCaptcha = $_SESSION['correctCaptcha']; // Sesuaikan ini dengan cara Anda menghasilkan captcha
+
+                            // Memeriksa apakah captcha sesuai
+                            if ($userEnteredCaptcha !== $correctCaptcha) {
+                                // Captcha tidak benar, tampilkan pesan kesalahan
+                                echo "Kode captcha tidak valid. Silakan coba lagi.";
+                            } else {
+                                // Captcha benar, lanjutkan dengan proses login
+                                // ...
+                            }
+                        }
+                        ?>
+                        <button type="submit" class ="bg-teal btn-block" style="background-color: teal; color: white; padding: 8px 16px; border: none; border-radius: 5px;">
+                            Submit
+                        </button>
                     </div>
                 </form>
                 <div class="flex mb-2">
@@ -51,7 +71,7 @@
                     <a class="text-sm text-maroon" href="/signup">Sign Up</a>
                 </div>
             </div>
-        </div>            
+        </div>
     </div>
 </body>
 </html>
