@@ -1,3 +1,7 @@
+Aurelius Brandon Alexander Abuthan (00000075101) 
+Kenndy Susio (00000075031)
+Muhammad Aziz Baihaqi (00000075248)
+
 Development Phase
 
 Initialization steps (must follow):
