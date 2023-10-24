@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,11 @@ Route::post('/signup', [AuthController::class, 'signup']);
 
 Route::get('/profile', [UserController::class, 'profile']);
 
-Route::get('/admin', [AdminController::class, 'index'])->middleware(['auth', 'admin']);
+Route::get('/admin', [AdminController::class, 'index'])->middleware(['auth', 'admin'])->name('admin');
+
+Route::get('/admin/menu', [AdminController::class, 'menu'])->middleware(['auth', 'admin'])->name('admin.menu');
+
+Route::get('/admin/category', [AdminController::class, 'category'])->middleware(['auth', 'admin'])->name('admin.category');
+Route::post('/category/create', [CategoryController::class, 'create'])->middleware(['auth', 'admin'])->name('category.create');
+
+Route::get('/admin/users', [AdminController::class, 'users'])->middleware(['auth', 'admin'])->name('admin.users');
