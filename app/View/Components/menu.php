@@ -11,9 +11,11 @@ class menu extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
-    {
-        //
+    public function __construct(
+        public int $menuId,
+        public string $name,
+        public string $image
+    ) {
     }
 
     /**
