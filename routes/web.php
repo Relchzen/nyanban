@@ -20,6 +20,7 @@ use App\Http\Controllers\MenuController;
 
 Route::get('/', [MenuController::class, 'index'])->name('home');
 
+
 Route::get('/login', function () {
     return view('login');
 });
