@@ -10,7 +10,7 @@
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
                     @foreach ($menu as $mn)
                         @if ($mn->category == $cat->category)
-                            <x-menu menuId="{{ $mn->id }}" name="{{ $mn->menu_name }}" image="{{ $mn->getImageURL() }}" desc="{{$mn->description}}" price="{{ $mn->price }}" />                    
+                            <x-menu menuId="{{ $mn->id }}" name="{{ $mn->menu_name }}" image="{{ $mn->getImageURL() }}" desc="{{$mn->description}}" price="{{ $mn->price }}" admin="{{ $admin }}" />                    
                         @endif
                     @endforeach
                 </div>

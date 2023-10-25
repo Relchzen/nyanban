@@ -28,7 +28,7 @@
                             <div class="text-xl font-comfortaa text-dark">Rp {{ number_format($price, 0, '.') }}</div>
                             <div class="text-md font-roboto text-dark max-w-xl">{{ $desc }}</div>
                             
-                            @if ($admin)
+                            {{-- @if ($admin) --}}
                                 
                             <div class="flex justify-end">
                                 <a href="" class="m-2 p-1 font-comfortaa bg-jade w-16 flex justify-center rounded-md">Edit</a>
@@ -37,7 +37,7 @@
                                     <a href="" class="m-2 p-1 font-comfortaa bg-lightmaroon w-16 flex justify-center rounded-md">Delete</a>
                                 </form>
                             </div>
-                            @endif
+                            {{-- @endif --}}
                         </div>
                     </div>
                 </div>

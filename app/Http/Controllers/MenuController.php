@@ -14,7 +14,14 @@ class MenuController extends Controller
         $category = Category::all();
         $menu = menu::all();
 
-        return view('welcome', compact('menu', 'category'));
+        $admin = false;
+        if (auth()->user()) {
+            if (auth()->user()->is_admin) {
+                $admin = true;
+            }
+        }
+
+        return view('welcome', ['menu' => $menu, 'admin' => $admin, 'category' => $category]);
     }
 
     public function show($id)
