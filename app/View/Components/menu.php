@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class menu extends Component
+class Menu extends Component
 {
     /**
      * Create a new component instance.
@@ -16,8 +16,7 @@ class menu extends Component
         public string $name,
         public string $image,
         public string $desc,
-        public int $price,
-        public bool $isAdmin
+        public int $price
     ) {
     }
 
@@ -26,6 +25,18 @@ class menu extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.menu');
+
+        $user = auth()->user();
+
+        if ($user) {
+            if ($user->is_admin) {
+                $admin = true;
+            } else {
+                $admin = false;
+            }
+        } else {
+            $admin = false;
+        }
+        return view('components.menu', ['admin' => $admin]);
     }
 }
