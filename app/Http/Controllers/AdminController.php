@@ -16,7 +16,9 @@ class AdminController extends Controller
 
     public function menu()
     {
-        return view('admin.menu', ['menu' => menu::all()]);
+        $menu = menu::all();
+        $category = Category::all();
+        return view('admin.menu', compact('category', 'menu'));
     }
 
     public function category()
