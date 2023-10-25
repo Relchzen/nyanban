@@ -12,7 +12,6 @@
             </div>
         </div>
 
-
         <div id="slideover-container{{$menuId}}" class="fixed inset-0 w-full h-full invisible z-50">
             <div id="slideover-bg{{$menuId}}" onclick="toggleSlideOver({{$menuId}})" class="absolute duration-200 ease-out transition-all inset-0 w-full h-full bg-gray-900 opacity-0"></div>
             <div id="slideover{{$menuId}}" class="p-5 absolute duration-200 ease-out transition-all bg-light bottom-0 h-3/4 lg:h-2/4 w-full translate-y-full">
