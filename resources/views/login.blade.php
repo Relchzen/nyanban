@@ -26,46 +26,43 @@
                 <form action="/auth/login" method="POST">
                     @csrf
                     <input type="text" name="email" id="email" class="mb-2 p-2 w-72 rounded-md" placeholder="Email address" autocomplete="off" /><br />
-                    <input type="password" name="password" id="password" class="mb-2 p-2 w-64 rounded-md" placeholder="Password" autocomplete="off" /><br />
+                    <input type="password" name="password" id="password" class="mb-2 p-2 w-72 rounded-md" placeholder="Password" autocomplete="off" /><br />
+                    
+                        @csrf
+                        <div class="form-group mt-4 mb-4">
+                            <div class="captcha flex">
+                                <span>{!! captcha_img() !!}</span>
+                                <button type="button" class="ml-4 btn bg-maroon p-2 rounded-md" id="reload" onclick="location.reload();">
+                                    <x-lucide-refresh-cw class="w-6 h-6" />
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <input id="captcha" type="text" class="form-control" placeholder="Enter The Code" name="captcha">
+                        </div>
+                        <div class ="form-group">
+                            <?php
+                            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                // Mengambil nilai yang dikirimkan oleh pengguna
+                                $userEnteredCaptcha = $_POST['captcha'];
+    
+                                // Mengambil nilai captcha yang benar
+                                $correctCaptcha = $_SESSION['correctCaptcha']; // Sesuaikan ini dengan cara Anda menghasilkan captcha
+    
+                                // Memeriksa apakah captcha sesuai
+                                if ($userEnteredCaptcha !== $correctCaptcha) {
+                                    // Captcha tidak benar, tampilkan pesan kesalahan
+                                    echo "Kode captcha tidak valid. Silakan coba lagi.";
+                                } else {
+                                    // Captcha benar, lanjutkan dengan proses login
+                                    // ...
+                                }
+                            }
+                            ?>
+                        </div>
                     <button type="submit" class="text-center p-1 hover:text-light w-full bg-teal rounded-md my-2 scale-95 hover:scale-100 transition ease-in-out duration-100">Login</button>
                 </form>
-                <form method="post" action="{{url('captcha-validation')}}">
-                    @csrf
-                    <div class="form-group mt-4 mb-4">
-                        <div class="captcha">
-                            <span>{!! captcha_img() !!}</span>
-                            <button type="button" class="btn btn-danger reload" id="reload" style="background-color: teal; color: white; padding: 8px 16px; border: none; border-radius: 5px;" onclick="location.reload();">
-                                    &#x21bb; Reload
-                            </button>
-                        </div>
-                    </div>
-                    <div class="form-group mb-4">
-                        <input id="captcha" type="text" class="form-control" placeholder="Enter The Code" name="captcha">
-                    </div>
-                    <div class ="form-group">
-                        <?php
-                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                            // Mengambil nilai yang dikirimkan oleh pengguna
-                            $userEnteredCaptcha = $_POST['captcha'];
-
-                            // Mengambil nilai captcha yang benar
-                            $correctCaptcha = $_SESSION['correctCaptcha']; // Sesuaikan ini dengan cara Anda menghasilkan captcha
-
-                            // Memeriksa apakah captcha sesuai
-                            if ($userEnteredCaptcha !== $correctCaptcha) {
-                                // Captcha tidak benar, tampilkan pesan kesalahan
-                                echo "Kode captcha tidak valid. Silakan coba lagi.";
-                            } else {
-                                // Captcha benar, lanjutkan dengan proses login
-                                // ...
-                            }
-                        }
-                        ?>
-                        <button type="submit" class ="bg-teal btn-block" style="background-color: teal; color: white; padding: 8px 16px; border: none; border-radius: 5px;">
-                            Submit
-                        </button>
-                    </div>
-                </form>
+                
                 <div class="flex mb-2">
                     <p class="text-dark text-sm mr-2">Don't have an account?</p>
                     <a class="text-sm text-maroon" href="/signup">Sign Up</a>

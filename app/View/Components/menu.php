@@ -14,7 +14,9 @@ class menu extends Component
     public function __construct(
         public int $menuId,
         public string $name,
-        public string $image
+        public string $image,
+        public string $desc,
+        public int $price
     ) {
     }
 
@@ -23,6 +25,19 @@ class menu extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.menu');
+
+        $user = auth()->user();
+
+        if ($user) {
+            if ($user->is_admin) {
+                $admin = true;
+            } else {
+                $admin = false;
+            }
+        } else {
+            $admin = false;
+        }
+
+        return view('components.menu', ['admin' => $admin]);
     }
 }
