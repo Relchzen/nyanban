@@ -16,7 +16,8 @@ class menu extends Component
         public string $name,
         public string $image,
         public string $desc,
-        public int $price
+        public int $price,
+        public bool $isAdmin
     ) {
     }
 
@@ -25,19 +26,6 @@ class menu extends Component
      */
     public function render(): View|Closure|string
     {
-
-        $user = auth()->user();
-
-        if ($user) {
-            if ($user->is_admin) {
-                $admin = true;
-            } else {
-                $admin = false;
-            }
-        } else {
-            $admin = false;
-        }
-
-        return view('components.menu', ['admin' => $admin]);
+        return view('components.menu');
     }
 }
