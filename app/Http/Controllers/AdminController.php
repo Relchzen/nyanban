@@ -16,9 +16,17 @@ class AdminController extends Controller
 
     public function menu()
     {
-        $menu = menu::all();
+        $admin = false;
+
+        $loggedin = auth()->check();
+        if ($loggedin) {
+            if (auth()->user()->is_admin) {
+                $admin = true;
+            }
+        }
         $category = Category::all();
-        return view('admin.menu', compact('category', 'menu'));
+        $menu = menu::all();
+        return view('admin.menu', ['menu' => $menu, 'category' => $category, 'admin' => $admin]);
     }
 
     public function category()
