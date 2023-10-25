@@ -11,18 +11,10 @@ class MenuController extends Controller
 
     public function index()
     {
-        $admin = false;
-
-        $loggedin = auth()->check();
-        if ($loggedin) {
-            if (auth()->user()->is_admin) {
-                $admin = true;
-            }
-        }
         $category = Category::all();
         $menu = menu::all();
 
-        return view('welcome', ['menu' => $menu, 'category' => $category, 'admin' => $admin]);
+        return view('welcome', compact('menu', 'category'));
     }
 
     public function show($id)
