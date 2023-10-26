@@ -91,7 +91,14 @@ class MenuController extends Controller
         return redirect()->route('admin.menu');
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $menu = menu::find($id);
+        // dump($menu->picture);
+        Storage::disk('public')->delete($menu->picture ?? '');
+
+        menu::where('id', $id)->firstOrFail()->delete();
+
+        return redirect()->route('admin.menu');
     }
 }

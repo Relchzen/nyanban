@@ -31,7 +31,10 @@
     }
 
     function toggleDeleteModal(id) {
-        document.getElementById("delete-modal"+id).classList.toggle("invisible");
+        document.getElementById("modal-container-"+id).classList.toggle("invisible");
+        document.getElementById("modal-background-"+id).classList.toggle("opacity-0");
+        document.getElementById("modal-background-"+id).classList.toggle("opacity-50");
+        document.getElementById("modal-"+id).classList.toggle("scale-0");
     }
 </script>
 @endsection

@@ -4,6 +4,7 @@ export default {
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
     "./resources/**/*.vue",
+    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
   ],
   theme: {
     extend: {
@@ -16,7 +17,8 @@ export default {
         active: '#C08261',
         darkcream: '#E1AA74',
         dark: '#473C33',
-        light: '#FAF3F0'
+        light: '#FAF3F0',
+        red: '#F15A59'
       },
       fontFamily: {
         comfortaa: 'Comfortaa',

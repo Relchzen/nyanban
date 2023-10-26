@@ -13,7 +13,7 @@
     </button>
 </div>
 
-<div id="sidebar" class="bg-maroon w-64 pt-2 text-light font-comfortaa absolute md:relative inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition duration-200 ease-in-out">
+<div id="sidebar" class="bg-maroon z-50 w-64 pt-2 text-light font-comfortaa absolute md:relative inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition duration-200 ease-in-out">
     <a href="/" class="flex-none">
         <div class="flex p-1 hover:cursor-pointer justify-center">
             <x-lucide-cat class="w-7 h-7 text-light mb-1" />
