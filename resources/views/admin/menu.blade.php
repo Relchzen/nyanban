@@ -14,7 +14,7 @@
                 <div class="grid grid-cols-2 lg:grid-cols-6 gap-3">
                     @foreach ($menu as $mn)
                         @if ($mn->category == $cat->category)
-                            <x-menu menuId="{{ $mn->id }}" name="{{ $mn->menu_name }}" image="{{ $mn->getImageURL() }}" desc="{{$mn->description}}" price="{{ $mn->price }}" admin="{{$admin}}" />                    
+                            <x-menu menuId="{{ $mn->id }}" name="{{ $mn->menu_name }}" image="{{ $mn->getImageURL() }}" desc="{{$mn->description}}" price="{{ $mn->price }}" />                    
                         @endif
                     @endforeach
                     </div>
@@ -23,15 +23,18 @@
 </div>
 
 <script>
-    function toggleSlideOver(menuId) {
-        id = menuId;
-        console.log(menuId);
+    function toggleSlideOver(id) {
         document.getElementById("slideover-container"+id).classList.toggle("invisible");
         document.getElementById("slideover-bg"+id).classList.toggle("opacity-0");
         document.getElementById("slideover-bg"+id).classList.toggle("opacity-50");
         document.getElementById("slideover"+id).classList.toggle("translate-y-full");
-        
-        
+    }
+
+    function toggleDeleteModal(id) {
+        document.getElementById("modal-container-"+id).classList.toggle("invisible");
+        document.getElementById("modal-background-"+id).classList.toggle("opacity-0");
+        document.getElementById("modal-background-"+id).classList.toggle("opacity-50");
+        document.getElementById("modal-"+id).classList.toggle("scale-0");
     }
 </script>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -14,14 +15,7 @@ class MenuController extends Controller
         $category = Category::all();
         $menu = menu::all();
 
-        $admin = false;
-        if (auth()->user()) {
-            if (auth()->user()->is_admin) {
-                $admin = true;
-            }
-        }
-
-        return view('welcome', ['menu' => $menu, 'admin' => $admin, 'category' => $category]);
+        return view('welcome', ['menu' => $menu, 'category' => $category]);
     }
 
     public function show($id)
@@ -63,5 +57,48 @@ class MenuController extends Controller
         $menu->save();
 
         return redirect('/admin/menu');
+    }
+
+    public function edit($id)
+    {
+        $menu = menu::find($id);
+        $category = Category::all();
+
+        return view('admin.menu.detail', compact('menu', 'category'));
+    }
+
+    public function update($id)
+    {
+        $menu = menu::find($id);
+        $validated = request()->validate(
+            [
+                'menu_name' => 'required|max:50|min:1',
+                'price' => 'required|min:1',
+                'category' => 'required',
+                'picture' => 'image|mimes:jpg,jpeg,png',
+            ]
+        );
+
+        if (request()->has('picture')) {
+            $imagePath = request()->file('picture')->store('images', 'public');
+            $validated['picture'] = $imagePath;
+
+            Storage::disk('public')->delete($menu->picture ?? '');
+        }
+
+        $menu->update($validated);
+
+        return redirect()->route('admin.menu');
+    }
+
+    public function delete($id)
+    {
+        $menu = menu::find($id);
+        // dump($menu->picture);
+        Storage::disk('public')->delete($menu->picture ?? '');
+
+        menu::where('id', $id)->firstOrFail()->delete();
+
+        return redirect()->route('admin.menu');
     }
 }

@@ -11,7 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&display=swap" rel="stylesheet">
-    @vite('./resources/css/app.css')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @vite('resources/css/app.css')
     <!-- Styles -->
 </head>
 <body class="antialiased bg-cream font-comfortaa">
@@ -21,45 +22,24 @@
                 <x-logo />
             </div>
             <br><br>
-            <div class="md:mb-48 bg-jade p-4 rounded-sm">
+            <div class="md:mb-28 bg-jade p-4 rounded-sm">
                 <p class="text-dark text-xl mb-2">Login</p>
                 <form action="/auth/login" method="POST">
                     @csrf
                     <input type="text" name="email" id="email" class="mb-2 p-2 w-72 rounded-md" placeholder="Email address" autocomplete="off" /><br />
                     <input type="password" name="password" id="password" class="mb-2 p-2 w-72 rounded-md" placeholder="Password" autocomplete="off" /><br />
                     
-                        @csrf
-                        <div class="form-group mt-4 mb-4">
-                            <div class="captcha flex">
+                        {{-- <div class="form-group mt-4 mb-4">
+                            <div class="captcha flex justify-between">
                                 <span>{!! captcha_img() !!}</span>
-                                <button type="button" class="ml-4 btn bg-maroon p-2 rounded-md" id="reload" onclick="location.reload();">
+                                <button type="button" class="ml-4 btn bg-maroon p-2 rounded-md" id="reload">
                                     <x-lucide-refresh-cw class="w-6 h-6" />
                                 </button>
                             </div>
                         </div>
                         <div class="form-group mb-4">
-                            <input id="captcha" type="text" class="form-control" placeholder="Enter The Code" name="captcha">
-                        </div>
-                        <div class ="form-group">
-                            <?php
-                            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                                // Mengambil nilai yang dikirimkan oleh pengguna
-                                $userEnteredCaptcha = $_POST['captcha'];
-    
-                                // Mengambil nilai captcha yang benar
-                                $correctCaptcha = $_SESSION['correctCaptcha']; // Sesuaikan ini dengan cara Anda menghasilkan captcha
-    
-                                // Memeriksa apakah captcha sesuai
-                                if ($userEnteredCaptcha !== $correctCaptcha) {
-                                    // Captcha tidak benar, tampilkan pesan kesalahan
-                                    echo "Kode captcha tidak valid. Silakan coba lagi.";
-                                } else {
-                                    // Captcha benar, lanjutkan dengan proses login
-                                    // ...
-                                }
-                            }
-                            ?>
-                        </div>
+                            <input id="captcha" type="text" class="mb-2 p-2 w-72 rounded-md" placeholder="Enter The Code" name="captcha">
+                        </div> --}}
                     <button type="submit" class="text-center p-1 hover:text-light w-full bg-teal rounded-md my-2 scale-95 hover:scale-100 transition ease-in-out duration-100">Login</button>
                 </form>
                 
@@ -70,5 +50,17 @@
             </div>
         </div>
     </div>
+
+    {{-- <script type="text/javascript">
+        $('#reload').click(function() {
+            $.ajax({
+                type: 'GET',
+                url: 'captcha/reload',
+                success: function(data) {
+                    $(".captcha span").html(data.captcha);
+                }
+            });
+        });
+    </script> --}}
 </body>
 </html>

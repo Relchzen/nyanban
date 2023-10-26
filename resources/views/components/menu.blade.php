@@ -7,12 +7,12 @@
                     </div>
                 </div>
                 <div class="mx-4 mb-2 flex flex-col">
-                    <h2 class="text-light font-comfortaa">{{ $name }}</h2>
+                    <p class="text-light text-sm font-comfortaa">{{ $name }}</p>
                 </div>
             </div>
         </div>
 
-        <div id="slideover-container{{$menuId}}" class="fixed inset-0 w-full h-full invisible z-50">
+        <div id="slideover-container{{$menuId}}" class="fixed inset-0 w-full h-full invisible z-30">
             <div id="slideover-bg{{$menuId}}" onclick="toggleSlideOver({{$menuId}})" class="absolute duration-200 ease-out transition-all inset-0 w-full h-full bg-gray-900 opacity-0"></div>
             <div id="slideover{{$menuId}}" class="p-5 absolute duration-200 ease-out transition-all bg-light bottom-0 h-3/4 lg:h-2/4 w-full translate-y-full">
                 <div onclick="toggleSlideOver({{$menuId}})" class="w-8 h-8 flex items-center justify-center absolute top-0 right-0 mt-5 mr-5">
@@ -28,18 +28,51 @@
                             <div class="text-xl font-comfortaa text-dark">Rp {{ number_format($price, 0, '.') }}</div>
                             <div class="text-md font-roboto text-dark max-w-xl">{{ $desc }}</div>
                             
-                            {{-- @if ($admin) --}}
-                                
-                            <div class="flex justify-end">
-                                <a href="" class="m-2 p-1 font-comfortaa bg-jade w-16 flex justify-center rounded-md">Edit</a>
-                                <form action="" method="POST">
-                                    @csrf
-                                    <a href="" class="m-2 p-1 font-comfortaa bg-lightmaroon w-16 flex justify-center rounded-md">Delete</a>
-                                </form>
+                            @if (auth()->user())
+                            <div>
+                                <button class="p-2 font-comfortaa flex justify-center rounded-3xl bg-jade">Add</button>
                             </div>
-                            {{-- @endif --}}
+                            @if (auth()->user()->is_admin)
+                            <div class="flex justify-end">
+                                <a href="{{route('menu.edit', $menuId)}}" class="m-2 p-1 font-comfortaa bg-jade w-16 flex justify-center rounded-md">Edit</a>
+                                <button onclick="toggleDeleteModal({{$menuId}})" class="m-2 p-1 font-comfortaa bg-lightmaroon w-16 flex justify-center rounded-md">Delete</button>
+                            </div>
+                            @endif
+                            @else
+                            <div class="flex justify-end">
+                                <a href="/login" class="p-2 font-comfortaa flex justify-center rounded-3xl bg-jade">
+                                    Add
+                                </a>
+
+                            </div>
+                            @endif
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-container-{{$menuId}}" class="fixed invisible z-50 w-full h-full inset-0">
+            <div id="modal-background-{{$menuId}}" onclick="toggleDeleteModal({{$menuId}})" class="absolute w-full h-full fixed bg-gray-900 opacity-0 duration-100 ease-out transition-all">
+            </div>
+            <div id="modal-{{$menuId}}" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-light h-min w-72 duration-200 ease-out transition-all rounded-lg scale-0">
+                <div id="modal-header" class="m-4 text-xl font-comfortaa">
+                    Warning
+                </div>
+                <div id="modal-body" class="p-4 text-md font-comfortaa">
+                    Are you sure you want to delete "{{ $name }}"?
+                </div>
+                <div class="flex justify-around p-4">
+                    <form action="{{ route('menu.delete', $menuId)}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="bg-maroon p-2 rounded-md font-comfortaa text-light">
+                            Yes, Delete
+                        </button>
+                    </form>
+                    <button class="p-2 bg-gray-700 rounded-md font-comfortaa text-light" onclick="toggleDeleteModal({{$menuId}})">
+                        No, Cancel
+                    </button>
                 </div>
             </div>
         </div>

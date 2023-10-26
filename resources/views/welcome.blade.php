@@ -10,7 +10,7 @@
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
                     @foreach ($menu as $mn)
                         @if ($mn->category == $cat->category)
-                            <x-menu menuId="{{ $mn->id }}" name="{{ $mn->menu_name }}" image="{{ $mn->getImageURL() }}" desc="{{$mn->description}}" price="{{ $mn->price }}" admin="{{ $admin }}" />                    
+                            <x-menu menuId="{{ $mn->id }}" name="{{ $mn->menu_name }}" image="{{ $mn->getImageURL() }}" desc="{{$mn->description}}" price="{{ $mn->price }}" />                    
                         @endif
                     @endforeach
                 </div>
@@ -29,5 +29,12 @@
                 
                 
             }
+
+            function toggleDeleteModal(id) {
+        document.getElementById("modal-container-"+id).classList.toggle("invisible");
+        document.getElementById("modal-background-"+id).classList.toggle("opacity-0");
+        document.getElementById("modal-background-"+id).classList.toggle("opacity-50");
+        document.getElementById("modal-"+id).classList.toggle("scale-0");
+    }
         </script>
 @endsection

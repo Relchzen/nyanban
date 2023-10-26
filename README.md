@@ -1,4 +1,4 @@
-Aurelius Brandon Alexander Abuthan (00000075101) 
+Aurelius Brandon Alexander Abuthan (00000075101)
 Kenndy Susio (00000075031)
 Muhammad Aziz Baihaqi (00000075248)
 
@@ -12,3 +12,7 @@ Initialization steps (must follow):
 4. install the tailwind dependencies by typing 'npm install' in the terminal
 5. to use tailwind run both 'php artisan serve' and 'npm run dev' to customize the style
 6. when the finishing, run 'npm run build' to save the customizations
+
+to login as admin please use this account:
+adminkedua@gmail.com
+adminadminadmin
