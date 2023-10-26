@@ -28,20 +28,25 @@
                             <div class="text-xl font-comfortaa text-dark">Rp {{ number_format($price, 0, '.') }}</div>
                             <div class="text-md font-roboto text-dark max-w-xl">{{ $desc }}</div>
                             
-                            {{-- @if ($admin) --}}
+                            @if (auth()->user())
                                 
+                            @if (auth()->user()->is_admin)
                             <div class="flex justify-end">
-                                <a href="" class="m-2 p-1 font-comfortaa bg-jade w-16 flex justify-center rounded-md">Edit</a>
-                                <form action="" method="POST">
-                                    @csrf
-                                    <a href="" class="m-2 p-1 font-comfortaa bg-lightmaroon w-16 flex justify-center rounded-md">Delete</a>
-                                </form>
+                                <a href="{{route('menu.edit', $menuId)}}" class="m-2 p-1 font-comfortaa bg-jade w-16 flex justify-center rounded-md">Edit</a>
+                                <button onclick="toggleDeleteModal($menuId)" class="m-2 p-1 font-comfortaa bg-lightmaroon w-16 flex justify-center rounded-md">Delete</button>
                             </div>
-                            {{-- @endif --}}
+                            @endif
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        {{-- <div id="modal-container-{{$menuId}}" class="fixed inset-1/2 w-4 h-4 bg-dark">
+            <div class="modal-background-{{$menuId}}" class="w-full h-full fixed">
+
+            </div>
+        </div> --}}
 
         <!-- End of product card -->

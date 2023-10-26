@@ -20,10 +20,11 @@ use App\Http\Controllers\MenuController;
 
 Route::get('/', [MenuController::class, 'index'])->name('home');
 
-
 Route::get('/login', function () {
     return view('login');
 });
+
+Route::get('/captcha/reload', [CaptchaServiceController::class, 'reload']);
 
 Route::post('/auth/login', [AuthController::class, 'login'])->name('login');
 
@@ -43,10 +44,12 @@ Route::get('/admin/menu', [AdminController::class, 'menu'])->middleware(['auth',
 Route::get('menu/{id}', [MenuController::class, 'show'])->name('menu.show');
 Route::get('/admin/menu/create', [MenuController::class, 'create'])->middleware(['auth', 'admin'])->name('menu.create');
 Route::put('/admin/menu/create', [MenuController::class, 'store'])->middleware(['auth', 'admin'])->name('menu.store');
-
+Route::get('admin/menu/edit/{id}', [MenuController::class, 'edit'])->middleware('auth', 'admin')->name('menu.edit');
+Route::post('admin/menu/update/{id}', [MenuController::class, 'update'])->middleware('auth', 'admin')->name('menu.update');
 
 Route::get('/admin/category', [AdminController::class, 'category'])->middleware(['auth', 'admin'])->name('admin.category');
 Route::post('/category/create', [CategoryController::class, 'create'])->middleware(['auth', 'admin'])->name('category.create');
 Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->middleware(['auth', 'admin'])->name('category.destroy');
+
 
 Route::get('/admin/users', [AdminController::class, 'users'])->middleware(['auth', 'admin'])->name('admin.users');

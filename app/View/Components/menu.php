@@ -25,18 +25,6 @@ class Menu extends Component
      */
     public function render(): View|Closure|string
     {
-
-        $user = auth()->user();
-
-        if ($user) {
-            if ($user->is_admin) {
-                $admin = true;
-            } else {
-                $admin = false;
-            }
-        } else {
-            $admin = false;
-        }
-        return view('components.menu', ['admin' => $admin]);
+        return view('components.menu');
     }
 }
